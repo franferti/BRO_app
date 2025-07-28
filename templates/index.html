@@ -2,16 +2,24 @@
 <html>
 <head>
     <title>App Oficial de los BROS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body class="bg-light text-center">
+
     <div class="container py-5">
+        <!-- Logo -->
         <img src="{{ url_for('static', filename='logo_bros.png') }}" width="150" class="mb-4">
+
+        <!-- Título -->
         <h1 class="mb-4">Bienvenido a la App oficial de los BROS</h1>
+
+        <!-- Pregunta BRO -->
         <p class="mb-3">Demuestra que eres un BRO contestando a esta pregunta:</p>
-        <form method="POST">
+
+        <form method="POST" class="w-50 mx-auto">
             <p><b>¿Cuál es el artículo 1 de los BROS?</b></p>
-            <select name="respuesta" class="form-select w-50 mx-auto mb-3">
+            <select name="respuesta" class="form-select mb-3">
                 <option value="1">Un BRO siempre confía en otro BRO</option>
                 <option value="2">Un BRO nunca se enfada con otro BRO</option>
                 <option value="3">Un BRO está por encima de todas las cosas</option>
@@ -20,8 +28,12 @@
             <div class="alert alert-danger">{{ error }}</div>
             {% endif %}
             <button class="btn btn-primary">Soy un BRO</button>
-            <a href="/admin" class="btn btn-outline-dark mt-3">Panel de Administración</a>
         </form>
+
+        <!-- Enlace al panel de administración -->
+        <hr class="my-4">
+        <a href="/admin" class="btn btn-outline-dark">Panel de Administración</a>
     </div>
+
 </body>
 </html>
