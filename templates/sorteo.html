@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorteo Amigo Invisible</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light text-center">
+    <div class="container py-5">
+        <h1 class="mb-4">Amigo Invisible BROS 2025</h1>
+        <p><b>Lugar:</b> Restaurante El Ancla</p>
+        <p><b>Fecha:</b> 20/12/2025</p>
+        <form method="POST" class="w-50 mx-auto">
+            <label class="form-label">Selecciona tu nombre:</label>
+            <select name="nombre" class="form-select mb-3" required>
+                {% for amigo in amigos %}
+                <option value="{{ amigo }}">{{ amigo }}</option>
+                {% endfor %}
+            </select>
+            <label class="form-label">¿Quién te tocó el año pasado?</label>
+            <select name="anterior" class="form-select mb-3" required>
+                {% for amigo in amigos %}
+                <option value="{{ amigo }}">{{ amigo }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn btn-success">Ver quién me ha tocado</button>
+        </form>
+    </div>
+</body>
+</html>
