@@ -5,13 +5,13 @@ import random
 
 app = Flask(__name__)
 
-# Cargar lista de amigos desde CSV
+ADMIN_PASSWORD = "admin123"  # Puedes cambiarlo
+
 def cargar_amigos():
     with open('amigos.csv', newline='') as f:
         reader = csv.DictReader(f)
         return [row['nombre'] for row in reader]
 
-# Cargar asignaciones ya realizadas
 def cargar_asignaciones():
     asignados = {}
     if os.path.exists('asignaciones.csv'):
@@ -21,7 +21,6 @@ def cargar_asignaciones():
                 asignados[row['nombre']] = row['asignado']
     return asignados
 
-# Guardar asignaciones
 def guardar_asignaciones(asignados):
     with open('asignaciones.csv', 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=['nombre', 'asignado'])
@@ -63,5 +62,14 @@ def sorteo():
 
     return render_template('sorteo.html', amigos=amigos)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'POST':
+        password = request.form.get('password')
+        if password == ADMIN_PASSWORD:
+            if os.path.exists('asignaciones.csv'):
+                os.remove('asignaciones.csv')
+            return render_template('admin.html', mensaje="Asignaciones reiniciadas con éxito.")
+        else:
+            return render_template('admin.html', error="Contraseña incorrecta.")
+    return render_template('admin.html')
